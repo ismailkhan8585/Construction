@@ -7,13 +7,15 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Organogram } from "@/components/organogram";
+import Image from "next/image";
 
 export default function Home() {
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
       <section className="relative overflow-hidden py-20 md:py-32">
-        <div className="absolute inset-0 bg-linear-to-br from-gray-100 to-white dark:from-gray-900 dark:to-black" />
+        <Image src={"/demo.jpg"} alt="Demo" width={5000} height={5000} className="absolute inset-0 w-full h-full object-cover opacity-20" />
+        {/* <div className="absolute inset-0 bg-linear-to-br from-gray-100 to-white dark:from-gray-900 dark:to-black" /> */}
         <div className="container relative mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
