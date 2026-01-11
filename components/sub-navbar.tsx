@@ -20,7 +20,23 @@ import {
 } from "@/components/ui/sheet"
 import { ScrollArea } from "@/components/ui/scroll-area"
 
-const subNavItems = [
+type SimpleNavItem = {
+  title: string
+  items: string[]
+}
+
+type NestedNavItem = {
+  title: string
+  subItems: {
+    title: string
+    items: string[]
+  }[]
+}
+
+type SubNavItem = SimpleNavItem | NestedNavItem
+
+
+const subNavItems: SubNavItem[] = [
     {
         title: 'Home',
         items: ['About', 'Introduction', 'Vision', 'Functions', 'Organogram']
