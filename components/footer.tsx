@@ -30,11 +30,11 @@ const Footer = () => {
     ]
 
     const modules = [
-        { name: 'E-registration', href: '/e-registration' },
-        { name: 'E-Standardization', href: '/e-standardization' },
-        { name: 'EPAD', href: '/epad' },
-        { name: 'GIS Portal', href: '/gis-portal' },
-        { name: 'E-billing', href: '/e-billing' },
+        { name: 'E-registration', href: '/' },
+        { name: 'E-Standardization', href: '/' },
+        { name: 'EPAD', href: '/' },
+        { name: 'GIS Portal', href: '/' },
+        { name: 'E-billing', href: '/' },
         { name: 'PWMIS', href: '/pwmis' },
     ]
 

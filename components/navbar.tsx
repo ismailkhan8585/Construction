@@ -4,6 +4,7 @@ import { Search, Menu, Moon, Bell, Sun, BookOpen } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import Link from "next/link";
 
 const Navbar = () => {
   return (
@@ -11,7 +12,9 @@ const Navbar = () => {
       <div className="container mx-auto px-4 ">
         <div className="flex h-14 md:h-16 items-center justify-between">
           {/* Logo */}
+          <Link href="/">
           <div className="flex items-center gap-2 cursor-pointer">
+            
             <div className="h-8 w-8 md:h-10 md:w-10 rounded-lg bg-linear-to-br from-blue-600 to-purple-600 flex items-center justify-center">
               <span className="text-white font-bold text-sm md:text-lg">
                 LOGO
@@ -26,6 +29,7 @@ const Navbar = () => {
               </p>
             </div>
           </div>
+          </Link>
 
           {/* Search + Right Icons - Desktop */}
           <div className="hidden md:flex items-center w-full px-4">
