@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { Send } from 'lucide-react'
+import React, { useState } from "react";
+import { Send } from "lucide-react";
 
 export default function CreateProjectPage() {
   const [formData, setFormData] = useState({
@@ -13,19 +13,24 @@ export default function CreateProjectPage() {
     budget: "",
     location: "",
     category: "Infrastructure",
-    documents: null, // for file upload
+    documents: null as FileList | null, // File upload
   });
 
-  const handleChange = (e) => {
-    const { name, value, files } = e.target;
-    if (name === "documents") {
+  // Handle input changes (text, select, textarea, file)
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
+    const { name, value, files } = e.target as HTMLInputElement;
+
+    if (name === "documents" && files) {
       setFormData({ ...formData, documents: files });
     } else {
       setFormData({ ...formData, [name]: value });
     }
   };
 
-  const handleSubmit = (e) => {
+  // Handle form submission
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("Project Created:", formData);
     alert("Project Created! Check console log.");
@@ -43,7 +48,7 @@ export default function CreateProjectPage() {
   };
 
   return (
-    <section className="w-full  from-gray-100 to-white py-20 min-h-screen">
+    <section className="w-full from-gray-100 to-white py-20 min-h-screen">
       <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12">
         {/* Page Header */}
         <div className="text-center mb-12">
@@ -56,7 +61,7 @@ export default function CreateProjectPage() {
           </p>
         </div>
 
-        {/* Form Container */}
+        {/* Form */}
         <form
           onSubmit={handleSubmit}
           className="bg-white p-10 rounded-2xl shadow-xl space-y-6"
@@ -164,12 +169,12 @@ export default function CreateProjectPage() {
 
           {/* Submit Button */}
           <button
-  type="submit"
-  className="w-full h-12 flex items-center justify-center gap-2 bg-black text-white font-medium rounded-lg shadow-md hover:from-blue-700 hover:to-indigo-700 hover:shadow-lg transition-all duration-300"
->
-  Send Message
-  <Send className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
-</button>
+            type="submit"
+            className="w-full h-12 flex items-center justify-center gap-2 bg-black text-white font-medium rounded-lg shadow-md hover:bg-gray-800 transition-all duration-300"
+          >
+            Send Message
+            <Send className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
+          </button>
         </form>
       </div>
     </section>
