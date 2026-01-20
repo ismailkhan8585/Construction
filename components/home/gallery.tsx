@@ -20,7 +20,7 @@ const galleryCategories = {
             id: 2,
             title: "Green Energy Initiative",
             description: "Sustainable energy solutions for future generations",
-            image: "https://images.unsplash.com-1470225620780-dba8ba36b745?w=800&h=600&fit=crop",
+            image: "https://media.istockphoto.com/id/2174080781/photo/clean-energy-solar-farm-and-wind-turbine.jpg?s=612x612&w=0&k=20&c=awiVrry3cpgnOCoiVmVNi-yEBvap59jrxDEG-llxIKM=",
             category: "Sustainability",
             year: "2022"
         },

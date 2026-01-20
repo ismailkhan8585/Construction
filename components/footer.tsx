@@ -67,7 +67,7 @@ const Footer = () => {
     return (
         <>
             {/* Main Footer */}
-            <footer className="bg-linear-to-b from-background to-muted/50 border-t mt-20">
+            <footer className="bg-black border-t mt-20 text-white ">
                 <div className="container mx-auto px-4 py-12 md:py-16">
                     {/* Four Column Layout */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
@@ -79,14 +79,14 @@ const Footer = () => {
                                 </div>
                                 <div>
                                     <h3 className="text-xl font-bold">Organization</h3>
-                                    <p className="text-sm text-muted-foreground">Excellence in Service</p>
+                                    <p className="text-sm  text-white">Excellence in Service</p>
                                 </div>
                             </div>
-                            <p className="text-muted-foreground mb-6">
+                            <p className="mb-6 text-white">
                                 Leading the way in innovative solutions and professional services since 2010.
                                 Committed to excellence, integrity, and sustainable growth.
                             </p>
-                            <div className="flex gap-3">
+                            <div className="flex gap-3 ">
                                 {socialLinks.slice(0, 3).map((social) => {
                                     const Icon = social.icon
                                     return (
@@ -94,7 +94,7 @@ const Footer = () => {
                                             key={social.label}
                                             variant="outline"
                                             size="icon"
-                                            className="rounded-full h-10 w-10"
+                                            className="rounded-full h-10 w-10 bg-black hover:text-blue-600  transition-colors"
                                             asChild
                                         >
                                             <a href={social.href} target="_blank" rel="noopener noreferrer">
@@ -120,7 +120,7 @@ const Footer = () => {
                                     <li key={department.name}>
                                         <Link
                                             href={department.href}
-                                            className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors group"
+                                            className="flex items-center gap-3 text-white hover:text-blue-600  transition-colors group"
                                         >
                                             <div className="h-1 w-1 rounded-full bg-primary opacity-0 group-hover:opacity-100 transition-opacity" />
                                             <span>{department.name}</span>
@@ -143,7 +143,7 @@ const Footer = () => {
                                     <li key={module.name}>
                                         <Link
                                             href={module.href}
-                                            className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors group"
+                                            className="flex items-center gap-3 text-white hover:text-blue-600  transition-colors group"
                                         >
                                             <div className="h-1 w-1 rounded-full bg-primary opacity-0 group-hover:opacity-100 transition-opacity" />
                                             <span>{module.name}</span>
@@ -170,7 +170,7 @@ const Footer = () => {
                                         <a
                                             key={index}
                                             href={contact.href}
-                                            className="flex items-start gap-3 text-muted-foreground hover:text-primary transition-colors group"
+                                            className="flex items-start gap-3 text-white hover:text-blue-600 transition-colors group"
                                         >
                                             <Icon className="h-5 w-5 mt-0.5 shrink-0" />
                                             <span className="text-sm">{contact.text}</span>
@@ -190,7 +190,7 @@ const Footer = () => {
                                                 key={social.label}
                                                 variant="ghost"
                                                 size="icon"
-                                                className="h-10 w-10 rounded-lg hover:bg-primary/10"
+                                                className="h-10 w-10 rounded-lg hover:text-blue-600 "
                                                 asChild
                                             >
                                                 <a href={social.href} target="_blank" rel="noopener noreferrer">
@@ -213,13 +213,13 @@ const Footer = () => {
                                     <Link
                                         key={link}
                                         href={`/${link.toLowerCase().replace(' ', '-')}`}
-                                        className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                                        className="text-sm text-white  hover:text-blue-600 s"
                                     >
                                         {link}
                                     </Link>
                                 ))}
                             </div>
-                            <div className="text-sm text-muted-foreground">
+                            <div className="text-sm text-white">
                                 ISO 9001:2015 Certified • Member Since 2010
                             </div>
                         </div>
@@ -227,7 +227,7 @@ const Footer = () => {
                 </div>
 
                 {/* Copyright Footer */}
-                <div className="bg-muted/40 border-t">
+                {/* <div className="bg-black border-t">
                     <div className="container mx-auto px-4 py-6">
                         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
                             <div className="text-center md:text-left">
@@ -249,7 +249,7 @@ const Footer = () => {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </footer>
         </>
     )
