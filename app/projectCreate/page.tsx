@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Send } from "lucide-react";
+import { Send, Calendar, DollarSign, BarChart3 } from "lucide-react";
 
 export default function CreateProjectPage() {
   const [formData, setFormData] = useState({
@@ -13,170 +13,166 @@ export default function CreateProjectPage() {
     budget: "",
     location: "",
     category: "Infrastructure",
-    documents: null as FileList | null, // File upload
+
+    nitDate: "",
+    workOrderDate: "",
+    commencementDate: "",
+    completionOriginal: "",
+    completionRevised: "",
+    contractorPremium: "",
+
+    pciOriginal: "",
+    pciRevised: "",
+    tsOriginal: "",
+    tsRevised: "",
+    boqOriginal: "",
+    boqRevised: "",
+
+    expenditure: "",
+    security: "",
+    dpr: "",
+    liability: "",
+    physicalProgress: "",
+    financialProgress: "",
+
+    documents: null as FileList | null,
   });
 
-  // Handle input changes (text, select, textarea, file)
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
-  ) => {
-    const { name, value, files } = e.target as HTMLInputElement;
-
-    if (name === "documents" && files) {
-      setFormData({ ...formData, documents: files });
-    } else {
-      setFormData({ ...formData, [name]: value });
-    }
-  };
-
-  // Handle form submission
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log("Project Created:", formData);
-    alert("Project Created! Check console log.");
-    setFormData({
-      title: "",
-      description: "",
-      status: "Ongoing",
-      startDate: "",
-      endDate: "",
-      budget: "",
-      location: "",
-      category: "Infrastructure",
-      documents: null,
-    });
+  const handleChange = (e: any) => {
+    const { name, value, files } = e.target;
+    setFormData({ ...formData, [name]: files ?? value });
   };
 
   return (
-    <section className="w-full from-gray-100 to-white py-20 min-h-screen">
-      <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12">
-        {/* Page Header */}
-        <div className="text-center mb-12">
+    <section className="min-h-screen  from-gray-50 to-gray-100 py-16">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+
+        {/* Header */}
+        <div className="text-center mb-14">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900">
             Create New Project
           </h1>
           <p className="mt-3 text-gray-600 max-w-2xl mx-auto">
-            Fill in the project details and upload related documents. All fields
-            marked with * are required.
+            Enter complete project details for tracking progress, cost, and history.
           </p>
         </div>
 
-        {/* Form */}
-        <form
-          onSubmit={handleSubmit}
-          className="bg-white p-10 rounded-2xl shadow-xl space-y-6"
-        >
-          {/* Title */}
-          <input
-            type="text"
-            name="title"
-            value={formData.title}
-            onChange={handleChange}
-            placeholder="Project Title *"
-            className="w-full p-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 text-gray-800"
-            required
-          />
+        <form className="space-y-10">
 
-          {/* Description */}
-          <textarea
-            name="description"
-            value={formData.description}
-            onChange={handleChange}
-            placeholder="Project Description *"
-            className="w-full p-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 text-gray-800"
-            rows={5}
-            required
-          />
+          {/* Basic Info */}
+          <Card title="Basic Information">
+            <Input name="title" placeholder="Project Title" onChange={handleChange} />
+            <Textarea name="description" placeholder="Project Description" onChange={handleChange} />
 
-          {/* Location & Budget */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <input
-              type="text"
-              name="location"
-              value={formData.location}
-              onChange={handleChange}
-              placeholder="Location"
-              className="w-full p-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 text-gray-800"
-            />
-            <input
-              type="text"
-              name="budget"
-              value={formData.budget}
-              onChange={handleChange}
-              placeholder="Budget"
-              className="w-full p-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 text-gray-800"
-            />
-          </div>
+            <div className="grid sm:grid-cols-2 gap-4">
+              <Input name="location" placeholder="Location" onChange={handleChange} />
+              <Input name="budget" placeholder="Budget" onChange={handleChange} icon={<DollarSign size={16} />} />
+            </div>
+          </Card>
 
-          {/* Start & End Dates */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <input
-              type="date"
-              name="startDate"
-              value={formData.startDate}
-              onChange={handleChange}
-              className="w-full p-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 text-gray-800"
-            />
-            <input
-              type="date"
-              name="endDate"
-              value={formData.endDate}
-              onChange={handleChange}
-              className="w-full p-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 text-gray-800"
-            />
-          </div>
+          {/* Project History */}
+          <Card title="Project History" icon={<Calendar size={18} />}>
+            <Grid>
+              <DateInput name="nitDate" label="NIT Date" onChange={handleChange} />
+              <DateInput name="workOrderDate" label="Work Order Date" onChange={handleChange} />
+              <DateInput name="commencementDate" label="Commencement Date" onChange={handleChange} />
+              <DateInput name="completionOriginal" label="Completion (Original)" onChange={handleChange} />
+              <DateInput name="completionRevised" label="Completion (Revised)" onChange={handleChange} />
+              <Input name="contractorPremium" placeholder="Contractor Premium" onChange={handleChange} />
+            </Grid>
+          </Card>
 
-          {/* Status & Category */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <select
-              name="status"
-              value={formData.status}
-              onChange={handleChange}
-              className="w-full p-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 text-gray-800"
-            >
-              <option value="Ongoing">Ongoing</option>
-              <option value="Completed">Completed</option>
-            </select>
+          {/* Cost Details */}
+          <Card title="Cost Details" icon={<DollarSign size={18} />}>
+            <Grid>
+              <Input name="pciOriginal" placeholder="PC-I Original Cost" onChange={handleChange} />
+              <Input name="pciRevised" placeholder="PC-I Revised Cost" onChange={handleChange} />
+              <Input name="tsOriginal" placeholder="TS Original Cost" onChange={handleChange} />
+              <Input name="tsRevised" placeholder="TS Revised Cost" onChange={handleChange} />
+              <Input name="boqOriginal" placeholder="BOQ Original Cost" onChange={handleChange} />
+              <Input name="boqRevised" placeholder="BOQ Revised Cost" onChange={handleChange} />
+            </Grid>
+          </Card>
 
-            <select
-              name="category"
-              value={formData.category}
-              onChange={handleChange}
-              className="w-full p-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 text-gray-800"
-            >
-              <option value="Infrastructure">Infrastructure</option>
-              <option value="Residential">Residential</option>
-              <option value="Commercial">Commercial</option>
-            </select>
-          </div>
+          {/* Progress */}
+          <Card title="Progress & Financial Status" icon={<BarChart3 size={18} />}>
+            <Grid>
+              <Input name="expenditure" placeholder="Expenditure (Million)" onChange={handleChange} />
+              <Input name="security" placeholder="Security (Million)" onChange={handleChange} />
+              <Input name="dpr" placeholder="DPR (Million)" onChange={handleChange} />
+              <Input name="liability" placeholder="Liability (Million)" onChange={handleChange} />
+              <Input name="physicalProgress" placeholder="Physical Progress (%)" onChange={handleChange} />
+              <Input name="financialProgress" placeholder="Financial Progress (%)" onChange={handleChange} />
+            </Grid>
+          </Card>
 
-          {/* Document Upload */}
-          <div>
-            <label className="block mb-2 text-gray-700 font-medium">
-              Upload Documents
-            </label>
+          {/* Upload */}
+          <Card title="Documents">
             <input
               type="file"
-              name="documents"
-              onChange={handleChange}
               multiple
-              className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-gray-900"
+              className="w-full rounded-lg border border-dashed p-6 text-gray-500 bg-gray-50 hover:bg-gray-100 transition"
             />
-            <p className="text-sm text-gray-500 mt-1">
-              You can upload PDFs, images, or other project files.
-            </p>
-          </div>
+          </Card>
 
-          {/* Submit Button */}
+          {/* Submit */}
           <button
             type="submit"
-            className="w-full h-12 flex items-center justify-center gap-2 bg-black text-white font-medium rounded-lg shadow-md hover:bg-gray-800 transition-all duration-300"
+            className="w-full md:w-1/3 mx-auto flex justify-center items-center gap-2 bg-black text-white py-3 rounded-xl shadow hover:bg-gray-800 transition"
           >
-            Send Message
-            <Send className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
+            Create Project <Send size={18} />
           </button>
+
         </form>
       </div>
     </section>
   );
 }
+
+/* ---------- Reusable UI ---------- */
+
+const Card = ({ title, icon, children }: any) => (
+  <div className="bg-white rounded-2xl shadow-sm border p-6 md:p-8 space-y-6">
+    <div className="flex items-center gap-2 text-lg font-semibold text-gray-800">
+      {icon} {title}
+    </div>
+    {children}
+  </div>
+);
+
+const Grid = ({ children }: any) => (
+  <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    {children}
+  </div>
+);
+
+const Input = ({ icon, ...props }: any) => (
+  <div className="relative">
+    {icon && <span className="absolute left-3 top-3 text-gray-400">{icon}</span>}
+    <input
+      {...props}
+      className={`w-full p-3 rounded-lg border focus:ring-2 focus:ring-black outline-none ${
+        icon ? "pl-9" : ""
+      }`}
+    />
+  </div>
+);
+
+const Textarea = (props: any) => (
+  <textarea
+    {...props}
+    rows={4}
+    className="w-full p-3 rounded-lg border focus:ring-2 focus:ring-black outline-none"
+  />
+);
+
+const DateInput = ({ label, ...props }: any) => (
+  <div>
+    <label className="text-sm text-gray-600 mb-1 block">{label}</label>
+    <input
+      type="date"
+      {...props}
+      className="w-full p-3 rounded-lg border focus:ring-2 focus:ring-black outline-none"
+    />
+  </div>
+);
