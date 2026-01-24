@@ -1,41 +1,20 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ProjectCard from "../../components/ui/ProjectCard";
 import ProjectFilter from "../../components/ui/ProjectFilter";
 
-const projects = [
-  {
-    id: "road-highway",
-    title: "Road & Highway Development",
-    description: "Construction of 20 km highway connecting major cities",
-    status: "Ongoing",
-    budget: "$12M",
-    location: "City A",
-    category: "Infrastructure",
-  },
-  {
-    id: "residential-housing",
-    title: "Residential Housing Project",
-    description: "Building 100 modern houses",
-    status: "Completed",
-    budget: "$8M",
-    location: "City B",
-    category: "Residential",
-  },
-  {
-    id: "bridge-construction",
-    title: "Bridge Construction",
-    description: "Steel bridge across river",
-    status: "Ongoing",
-    budget: "$15M",
-    location: "City C",
-    category: "Infrastructure",
-  },
-];
-
 export default function ProjectsPage() {
-  const categories = ["All", "Ongoing", "Completed", "Infrastructure", "Residential"];
+  const categories = ["All", "Ongoing", "Completed"];
   const [selected, setSelected] = useState("All");
+  const [projects, setProjects] = useState<any[]>([]);
+
+  useEffect(() => {
+    // Get real projects from localStorage
+    const storedProjects = localStorage.getItem("projects");
+    if (storedProjects) {
+      setProjects(JSON.parse(storedProjects));
+    }
+  }, []);
 
   const filtered =
     selected === "All"
@@ -59,9 +38,15 @@ export default function ProjectsPage() {
         />
 
         <div className="grid md:grid-cols-3 gap-6 mt-8">
-          {filtered.map((project) => (
-            <ProjectCard key={project.id} project={project} />
-          ))}
+          {filtered.length > 0 ? (
+            filtered.map((project) => (
+              <ProjectCard key={project.id} project={project} />
+            ))
+          ) : (
+            <p className="text-center col-span-3 text-gray-500">
+              No projects found.
+            </p>
+          )}
         </div>
       </div>
     </section>
